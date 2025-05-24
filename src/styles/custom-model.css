@@ -1,0 +1,38 @@
+.modal-overlay {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.modal {
+    background: white;
+    padding: 2rem;
+    border-radius: 0.875rem;
+    min-width: 400px;
+    max-width: 600px;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem
+}
+
+.logo-image {
+    height: 35px;
+    margin-right: 0.25rem;
+    border-radius: 0.2rem;
+    width: 35px;
+}

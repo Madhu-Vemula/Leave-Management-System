@@ -1,0 +1,26 @@
+
+.donut-container {
+    display: flex;
+}
+
+@keyframes blink {
+    0% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.7;
+        filter: drop-shadow(0 0 10px rgb(235, 102, 102));
+    }
+
+    100% {
+        opacity: 1;
+        filter: drop-shadow(0 0 15px rgb(255, 208, 110));
+    }
+}
+
+.donut-container div {
+    display: flex;
+    align-items: center;
+    gap: 0.625rem;
+}

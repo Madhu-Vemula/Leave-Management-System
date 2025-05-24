@@ -1,0 +1,39 @@
+.login-container {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+}
+
+.form-wrapper {
+    width: 50vw;
+    display: flex;
+    justify-content: center;
+}
+
+.form-wrapper .form-container {
+    min-width: 50%;
+}
+
+.company-cover-image {
+    width: 50vw;
+    height: 100vh;
+}
+
+.company-logo {
+    height: 35px;
+    margin-right: 0.25rem;
+    border-radius: 0.2rem;
+    width: 35px;
+}
+
+.form-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-form {
+    padding: 2rem;
+    margin: 0.5rem 0rem;
+    box-shadow: 0 0 0.625rem rgba(0, 0, 0, 0.1);
+}

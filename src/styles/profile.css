@@ -1,0 +1,19 @@
+
+.company-profile-image {
+    border-radius: 50%;
+    width: 25%;
+    align-self: center;
+}
+
+.profile-header {
+    display: flex;
+    flex-direction: column;
+}
+
+.profile-header b {
+    color: var(--primary-color);
+}
+
+.profile-header p {
+    font-size: 1.2rem;
+}

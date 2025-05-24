@@ -1,0 +1,39 @@
+.custom-table-container {
+    overflow-x: auto;
+    scrollbar-width: thin;
+    width: 100%;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 1rem;
+    border-radius: 0.625rem;
+}
+
+thead {
+    background-color: var(--secondary-color);
+    color: var(--primary-color);
+}
+
+th,
+td {
+    padding: 0.75rem 1rem;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+    font-size: 1rem;
+
+}
+
+h3 {
+    text-align: center;
+    color: var(--primary-border-color)
+}
+
+tr {
+    border-radius: 0.625rem;
+}
+
+tbody tr:hover {
+    background-color: #f1f1f1;
+}

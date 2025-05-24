@@ -1,0 +1,106 @@
+{
+  "leaves": [
+    {
+      "id": "bdf8",
+      "empId": "1742",
+      "email": "madhu.vemula@pal.tech",
+      "dayDifference": 2,
+      "status": "cancelled",
+      "leaveType": "paid",
+      "reason": "not now",
+      "startDate": "2025-05-30",
+      "endDate": "2025-05-31"
+    },
+    {
+      "id": "676d",
+      "empId": "1742",
+      "email": "madhu.vemula@pal.tech",
+      "dayDifference": 4,
+      "status": "cancelled",
+      "leaveType": "paid",
+      "reason": "Hello",
+      "startDate": "2025-06-02",
+      "endDate": "2025-06-05"
+    },
+    {
+      "id": "5edc",
+      "empId": "1742",
+      "email": "madhu.vemula@pal.tech",
+      "dayDifference": 1,
+      "status": "cancelled",
+      "leaveType": "unpaid",
+      "reason": "not now",
+      "startDate": "2025-05-30",
+      "endDate": "2025-05-30"
+    },
+    {
+      "id": "85c7",
+      "empId": "1742",
+      "email": "madhu.vemula@pal.tech",
+      "dayDifference": 4,
+      "status": "cancelled",
+      "leaveType": "paid",
+      "reason": "not now",
+      "startDate": "2025-05-31",
+      "endDate": "2025-06-03"
+    },
+    {
+      "id": "66e8",
+      "empId": "1742",
+      "email": "madhu.vemula@pal.tech",
+      "dayDifference": 3,
+      "status": "cancelled",
+      "leaveType": "unpaid",
+      "reason": "hello",
+      "startDate": "2025-05-27",
+      "endDate": "2025-05-29"
+    }
+  ],
+  "employees": [
+    {
+      "id": "8713",
+      "empId": "141",
+      "name": "Suketh",
+      "email": "suketh@pal.tech",
+      "role": "manager",
+      "managerEmail": "hr@pal.tech",
+      "password": "suketh@pal"
+    },
+    {
+      "id": "cf16",
+      "empId": "142",
+      "name": "Sreekar",
+      "email": "sreekar@pal.tech",
+      "role": "manager",
+      "managerEmail": "hr@pal.tech",
+      "password": "sreekar@pal"
+    },
+    {
+      "id": "e1bd",
+      "empId": "1742",
+      "name": "Madhu Vemula",
+      "email": "madhu.vemula@pal.tech",
+      "role": "employee",
+      "managerEmail": "sreekar@pal.tech",
+      "password": "madhu@pal"
+    },
+    {
+      "id": "c679",
+      "empId": "1740",
+      "name": "rishi alluri",
+      "email": "rishi.alluri@pal.tech",
+      "role": "employee",
+      "managerEmail": "suketh@pal.tech",
+      "password": "rishi@pal"
+    },
+    {
+      "id": "c40d",
+      "empId": "1743",
+      "name": "harsha",
+      "email": "harsha.musku@pal.tech",
+      "role": "employee",
+      "managerEmail": "sreekar@pal.tech",
+      "password": "harsha@pal"
+    }
+  ]
+}

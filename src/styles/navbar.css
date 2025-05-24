@@ -1,0 +1,102 @@
+.navbar-containter {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--primary-color);
+    padding: 1.5rem;
+    font-size: 1rem;
+}
+
+.nav-bar-icon {
+    cursor: pointer;
+}
+
+.mobile-navbar-btn {
+    background-color: var(--primary-color);
+    color: var(--primary-font-color);
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.nav-buttons-container {
+    display: flex;
+    gap: 1rem;
+    font-size: 1rem;
+}
+
+.nav-link {
+    text-decoration: none;
+    color: var(--primary-font-color);
+    font-size: 1.125rem;
+}
+
+.nav-link.active {
+    border-bottom: 0.25rem solid var(--primary-border-color);
+}
+
+.logout-btn {
+    background-color: var(--primary-border-color);
+    padding: 0.625rem;
+    font-size: 1rem;
+    color: var(--primary-font-color);
+    border-radius: 0.25rem;
+}
+
+.mobile-navbar {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    position: absolute;
+    background-color: var(--primary-color);
+}
+
+.mobile-nav-link {
+    background-color: var(--primary-dark-color);
+    padding: 1rem 0.5rem;
+    border-radius: 0;
+    text-align: left;
+    font-weight: 600;
+    outline: 1px solid var(--secondary-color);
+}
+
+.mobile-nav-link.active {
+    border-bottom: none;
+}
+
+.hide-nav-bar {
+    display: none;
+}
+
+.nav-logout-container {
+    margin: 0.5rem 0.5rem;
+}
+
+.nav-logout-container .logout-btn {
+    width: 100%;
+}
+
+.nav-footer {
+    display: flex;
+    align-items: center;
+}
+
+.nav-profile {
+    display: flex;
+    flex-direction: column;
+    padding: 0.25rem 0.625rem;
+    margin-right: 0.5rem;
+    border-radius: 0.25rem; 
+    background-color: var(--primary-color); 
+    color: var(--primary-font-color); 
+    border: 0.05rem solid var(--secondary-color);
+}
+
+.nav-profile b {
+    color: var(--primary-border-color)
+}
+
+@media (max-width:640px) {
+    .company-logo-new {
+        width: 40% !important;
+    }
+}
