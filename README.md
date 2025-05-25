@@ -87,18 +87,18 @@ To start the frontend application:
 - `npm start`   
 # backend Json Server
 - `npm run server` 
-` Note that the development build is not optimized`.
-` To create a production build, use ``npm run build`.
+# Note that the development build is not optimized.
+# To create a production build, use `npm run build`.
 
 # 🧪 Future Enhancements
-
 - ✅ **Toast notifications for actions (leave apply, update, reject)**
-- 📥 **Pagination and sorting in employee list**
 
-- 🛂 **Admin/HR view with broader access**
+# 📥** Pagination and sorting in employee list**
 
-- 📌 **Form feedback onBlur and inline hints**
+# 🛂 ** Admin/HR view with broader access**
 
-- 📆 **Calendar view for managers**
+# 📌 Form feedback onBlur and inline hints
 
-- 📬 **Email notifications (mock or real)**
+# 📆 Calendar view for managers
+
+# 📬 Email notifications (mock or real) 

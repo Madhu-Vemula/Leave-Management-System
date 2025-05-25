@@ -1,22 +1,15 @@
 import { useEffect } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
-
-enum ToastType {
-    SUCCESS = "success",
-    ERROR = "error",
-    INFO = "info",
-    WARNING = "warning"
-
-}
+import { ToastType } from '../../Types/enumTypes';
 
 interface CustomToastProps {
     message: string,
     type: ToastType,
     duration?: number
 }
-const CustomToast: React.FC<CustomToastProps> = ({ message, type, duration = 3000 }: CustomToastProps) => {
+const CustomToast: React.FC<CustomToastProps> = ({ message, type, duration = 3000 }: CustomToastProps) => { 
+    console.log(type)
     useEffect(() => {
         toast[type](message, { autoClose: duration })
     }, [type, message, duration])

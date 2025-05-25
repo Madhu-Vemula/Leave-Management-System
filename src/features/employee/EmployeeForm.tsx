@@ -24,10 +24,11 @@ import ManagerDropDown from "./ManagerDropDown";
  */
 interface EmployeeFormProps {
   initialEmployeeData: Employee | null,
-  onCloseFormModal: () => void
+  onClose: () => void,
+  onSubmit: () => void
 }
 const EmployeeForm: React.FC<EmployeeFormProps> = (props: EmployeeFormProps): React.JSX.Element => {
-  const { initialEmployeeData, onCloseFormModal } = props
+  const { initialEmployeeData, onClose, onSubmit } = props
   const [addEmployee] = useAddEmployeeMutation();
   const [updateEmployee] = useUpdateEmployeeMutation();
   const { data: managerData = [] } = useGetAllManagersQuery();
@@ -97,7 +98,7 @@ const EmployeeForm: React.FC<EmployeeFormProps> = (props: EmployeeFormProps): Re
    * @description Closes the form pop-up without submitting data.
    */
   const handleCancelRequest = (): void => {
-    onCloseFormModal()
+    onClose()
   };
 
   /**
@@ -155,7 +156,7 @@ const EmployeeForm: React.FC<EmployeeFormProps> = (props: EmployeeFormProps): Re
         const response = await updateEmployee(employeeForm).unwrap();
         console.log(response);
       }
-      onCloseFormModal()
+      onSubmit()
     } catch (error) {
       alert(ErrorMessages.CatchError + { error });
     }

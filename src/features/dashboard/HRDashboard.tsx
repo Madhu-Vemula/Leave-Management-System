@@ -1,5 +1,5 @@
 import { useGetEmployeesQuery, useRemoveEmployeeMutation } from "../../services/employeeService";
-import { Employee } from "../../Types";
+import { Employee, ToastMessage } from "../../Types";
 import { useDeleteLeavesByIdMutation, useLazyGetLeaveByUserQuery } from "../../services/leaveService";
 import EmployeeForm from "../employee/EmployeeForm";
 import { useState } from "react";
@@ -7,7 +7,9 @@ import Navbar from "../../components/common/Navbar";
 import { CustomTable } from "../../components/common/CustomTable";
 import { ErrorMessages } from "../../utils/errorUtils";
 import { getEmployeeColumns } from "../employee/EmployeeColumns";
-
+import { v4 as uuidv4 } from "uuid"
+import { ToastContent, ToastType } from "../../Types/enumTypes";
+import CustomToast from "../../components/layout/CustomToast";
 /**
  * @component EmployeeList
  * @description Renders a table of all employees, with options to edit or remove employees.
@@ -22,6 +24,12 @@ const HrDashboard: React.FC = (): React.JSX.Element => {
     const [getLeavesByUser] = useLazyGetLeaveByUserQuery();
     const [initialEmployeeData, setInitialEmployeeData] = useState<Employee | null>(null)
     const [showEmployeeFormModal, setShowEmployeeFormModal] = useState<boolean>(false)
+    const [showToast, setShowToast] = useState<boolean>(false)
+    const [toastFields, setToastFields] = useState<ToastMessage>({
+        toastKey: uuidv4(),
+        message: '',
+        type: ToastType.SUCCESS
+    })
     /**
      * @function handleEditEmployee
      * @description Opens the form pop-up with selected employee data prefilled for editing.
@@ -55,6 +63,13 @@ const HrDashboard: React.FC = (): React.JSX.Element => {
         } catch (error) {
             alert(ErrorMessages.CatchError + { error });
         }
+        setShowToast(true)
+        setToastFields({
+            ...toastFields,
+            toastKey: uuidv4(),
+            message: ToastContent.EMPLOYEEDELETED,
+            type: ToastType.ERROR
+        })
     };
     /**
         * @function handleAddEmployee
@@ -90,7 +105,22 @@ const HrDashboard: React.FC = (): React.JSX.Element => {
             </div>
             {showEmployeeFormModal && <EmployeeForm
                 initialEmployeeData={initialEmployeeData}
-                onCloseFormModal={() => setShowEmployeeFormModal(false)}
+                onClose={() => setShowEmployeeFormModal(false)}
+                onSubmit={() => {
+                    setShowEmployeeFormModal(false)
+                    setShowToast(true)
+                    setToastFields({
+                        ...toastFields,
+                        toastKey: uuidv4(),
+                        message: initialEmployeeData ? ToastContent.EMPLOYEEUPDATED : ToastContent.EMPLOYEESUCCESS,
+                        type: ToastType.SUCCESS
+                    })
+                }}
+            />}
+            {showToast && <CustomToast
+                key={toastFields.toastKey}
+                message={toastFields.message}
+                type={toastFields.type}
             />}
         </>
     );

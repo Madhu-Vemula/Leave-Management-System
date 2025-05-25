@@ -5,7 +5,7 @@ interface ModalProps {
     title: string,
     logoSrc?: string,
     onClose: () => void,
-    onSubmit?: () => Promise<void>,
+    onSubmit?: () => any,
     children: React.ReactNode,
     showFooter?: boolean,
     submitText?: string,
@@ -53,9 +53,8 @@ const Modal = (
                     <div className="modal-footer">
                         <button className="button cancel-btn" onClick={onClose}>{cancelText} </button>
                         {submitText &&
-                            (
-                                <button type="button" className="button submit-btn" onClick={onSubmit}>{submitText}</button>
-                            )}
+                            <button type="button" className="button submit-btn" onClick={onSubmit}>{submitText}</button>
+                        }
                     </div>
                 )}
             </div>

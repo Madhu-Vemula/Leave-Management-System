@@ -2,12 +2,9 @@ import { NavLink, useNavigate } from "react-router-dom";
 import palTechLogoNew from "../../assets/images/paltech_logo_new.svg";
 import navCrossIcon from "../../assets/icons/cross-icon.png";
 import navBarIcon from "../../assets/icons/nav-bar-icon.svg";
-import { getUserMailFromSession, getUserRoleFromSession } from "../../utils/roleUtils";
+import { getUserRoleFromSession } from "../../utils/roleUtils";
 import { useState } from "react";
 import { RoleType } from "../../Types/enumTypes";
-import { convertFirstLetterToUpperCase } from "../../utils/leaveUtils";
-import { useGetEmployeeByMailQuery } from "../../services/employeeService";
-import Loader from "../layout/Loader";
 
 /** 
  * @description
@@ -20,10 +17,8 @@ import Loader from "../layout/Loader";
  */
 const Navbar: React.FC = (): React.JSX.Element => {
     const userRole = getUserRoleFromSession();
-    const userEmail = getUserMailFromSession()
     const navigate = useNavigate();
     const [toggleNavBar, setToggleNavBar] = useState<boolean>(false);
-    const { data: employeeData = [], isLoading: isLoadingEmployeeData } = useGetEmployeeByMailQuery(userEmail)
     /**
      * Logs out the current user.
      *
@@ -51,7 +46,6 @@ const Navbar: React.FC = (): React.JSX.Element => {
     const hideNavBar = (): void => {
         setToggleNavBar((prev) => !prev);
     };
-    if (isLoadingEmployeeData) return <Loader />
 
     return (
         <>
@@ -71,10 +65,6 @@ const Navbar: React.FC = (): React.JSX.Element => {
                     }
                 </div>
                 <div className="nav-footer">
-                    <div className="nav-profile">
-                        {employeeData[0] && <span><b>Name: </b>{employeeData[0].name ?? 'Not Found'}</span>}
-                        <span><b>Role: </b>{convertFirstLetterToUpperCase(userRole)}</span>
-                    </div>
                     <button type="button" title="logout" className="button logout-btn" onClick={() => logOutUser()}>
                         Log out
                     </button>

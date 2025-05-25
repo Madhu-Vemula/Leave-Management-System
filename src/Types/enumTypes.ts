@@ -71,7 +71,20 @@ export enum LeaveBalance {
     BALANCE = 20
 }
 
-export enum ToastMessages {
-    LEAVESUCCESS = "Leave submitted Successfully",
-    LEAVECANCEL = "Leave Cancelled Successfully"
+export enum ToastContent {
+    LEAVESUCCESS = "Leave Submitted Successfully",
+    LEAVECANCEL = "Leave Cancelled Successfully",
+    EMPLOYEESUCCESS = "Employee Added Successfully",
+    EMPLOYEEUPDATED = "Employee Updated Successfully ",
+    EMPLOYEEDELETED = "Employee Deleted Successfully",
+    LEAVEAPPROVED = "Leave Approved Successfully",
+    LEAVEREJECTED = "Leave Rejected Successfully"
+}
+
+export enum ToastType {
+    SUCCESS = "success",
+    ERROR = "error",
+    INFO = "info",
+    WARNING = "warning"
+
 }

@@ -1,3 +1,5 @@
+import { ToastType } from "./enumTypes";
+
 /**
  * @description Form fields used for user login.
  */
@@ -109,4 +111,8 @@ export interface CustomTableProps<T> {
   emptyMessage?: string
 }
 
-
+export interface ToastMessage {
+  toastKey: string,
+  message: string,
+  type: ToastType
+}

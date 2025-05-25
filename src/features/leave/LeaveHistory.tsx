@@ -1,6 +1,6 @@
 import { ChangeEvent, useEffect, useState } from "react";
-import { Leave } from "../../Types";
-import { ActionType, LeaveStatus, LeaveType, RoleType, ToastMessages } from "../../Types/enumTypes";
+import { Leave, ToastMessage } from "../../Types";
+import { ActionType, LeaveStatus, LeaveType, RoleType, ToastContent, ToastType } from "../../Types/enumTypes";
 import { useLazyGetLeaveByUserQuery, useLazyGetLeavesQuery } from "../../services/leaveService";
 import { getUserFromSession, getUserMailFromSession } from "../../utils/roleUtils";
 import { convertFirstLetterToUpperCase } from "../../utils/leaveUtils";
@@ -22,19 +22,6 @@ import { v4 as uuidv4 } from "uuid"
  * @returns {React.JSX.Element}
  */
 
-enum ToastType {
-    SUCCESS = "success",
-    ERROR = "error",
-    INFO = "info",
-    WARNING = "warning"
-
-}
-
-interface LeaveToastType {
-    toastKey: string,
-    message: string,
-    type: ToastType
-}
 
 const LeaveHistory = (): React.JSX.Element => {
     const user = getUserFromSession();
@@ -52,7 +39,7 @@ const LeaveHistory = (): React.JSX.Element => {
     const [showLeaveFormModal, setShowLeaveFormModal] = useState<boolean>(false)
     const [showCancelLeaveModal, setshowCancelLeaveModal] = useState<boolean>(false)
     const [showToast, setShowToast] = useState<boolean>(false)
-    const [toastFields, setToastFields] = useState<LeaveToastType>({
+    const [toastFields, setToastFields] = useState<ToastMessage>({
         toastKey: uuidv4(),
         message: '',
         type: ToastType.SUCCESS
@@ -154,7 +141,7 @@ const LeaveHistory = (): React.JSX.Element => {
                         setRefetchLeaveHistory((prev) => !prev)
                         setToastFields({
                             ...toastFields, toastKey: uuidv4(),
-                            type: ToastType.SUCCESS, message: ToastMessages.LEAVESUCCESS
+                            type: ToastType.SUCCESS, message: ToastContent.LEAVESUCCESS
                         })
                     }}
                 />
@@ -164,11 +151,12 @@ const LeaveHistory = (): React.JSX.Element => {
                     cancelledLeaveItem={initialLeaveData}
                     onClose={() => { setshowCancelLeaveModal(false) }}
                     onSubmit={() => {
+                        setShowToast(true)
                         setRefetchLeaveHistory((prev) => !prev)
                         setshowCancelLeaveModal(false)
                         setToastFields({
                             ...toastFields, toastKey: uuidv4(),
-                            type: ToastType.ERROR, message: ToastMessages.LEAVECANCEL
+                            type: ToastType.ERROR, message: ToastContent.LEAVECANCEL
                         })
                     }}
                 />

@@ -5,7 +5,7 @@
       "empId": "1742",
       "email": "madhu.vemula@pal.tech",
       "dayDifference": 2,
-      "status": "cancelled",
+      "status": "pending",
       "leaveType": "paid",
       "reason": "not now",
       "startDate": "2025-05-30",
@@ -16,44 +16,108 @@
       "empId": "1742",
       "email": "madhu.vemula@pal.tech",
       "dayDifference": 4,
-      "status": "cancelled",
+      "status": "pending",
       "leaveType": "paid",
       "reason": "Hello",
       "startDate": "2025-06-02",
-      "endDate": "2025-06-05"
+      "endDate": "2025-06-05",
+      "respondedBy": "sreekar@pal.tech"
     },
     {
       "id": "5edc",
       "empId": "1742",
       "email": "madhu.vemula@pal.tech",
       "dayDifference": 1,
-      "status": "cancelled",
+      "status": "pending",
       "leaveType": "unpaid",
       "reason": "not now",
       "startDate": "2025-05-30",
-      "endDate": "2025-05-30"
+      "endDate": "2025-05-30",
+      "respondedBy": "sreekar@pal.tech"
     },
     {
       "id": "85c7",
       "empId": "1742",
       "email": "madhu.vemula@pal.tech",
       "dayDifference": 4,
-      "status": "cancelled",
+      "status": "pending",
       "leaveType": "paid",
       "reason": "not now",
       "startDate": "2025-05-31",
-      "endDate": "2025-06-03"
+      "endDate": "2025-06-03",
+      "respondedBy": "sreekar@pal.tech"
     },
     {
       "id": "66e8",
       "empId": "1742",
       "email": "madhu.vemula@pal.tech",
       "dayDifference": 3,
-      "status": "cancelled",
+      "status": "reject",
       "leaveType": "unpaid",
       "reason": "hello",
       "startDate": "2025-05-27",
-      "endDate": "2025-05-29"
+      "endDate": "2025-05-29",
+      "respondedBy": "sreekar@pal.tech"
+    },
+    {
+      "id": "90af",
+      "empId": "1742",
+      "email": "madhu.vemula@pal.tech",
+      "dayDifference": 2,
+      "status": "reject",
+      "leaveType": "unpaid",
+      "reason": "now",
+      "startDate": "2025-05-30",
+      "endDate": "2025-05-31",
+      "respondedBy": "sreekar@pal.tech"
+    },
+    {
+      "id": "9f77",
+      "empId": "1742",
+      "email": "madhu.vemula@pal.tech",
+      "dayDifference": 2,
+      "status": "reject",
+      "leaveType": "paid",
+      "reason": "Not now",
+      "startDate": "2025-05-30",
+      "endDate": "2025-05-31",
+      "respondedBy": "sreekar@pal.tech"
+    },
+    {
+      "id": "2da5",
+      "empId": "1742",
+      "email": "madhu.vemula@pal.tech",
+      "dayDifference": 2,
+      "status": "approve",
+      "leaveType": "paid",
+      "reason": "Fever",
+      "startDate": "2025-05-29",
+      "endDate": "2025-05-30",
+      "respondedBy": "sreekar@pal.tech"
+    },
+    {
+      "id": "d5db",
+      "empId": "1742",
+      "email": "madhu.vemula@pal.tech",
+      "dayDifference": 2,
+      "status": "approve",
+      "leaveType": "paid",
+      "reason": "Fest",
+      "startDate": "2025-06-24",
+      "endDate": "2025-06-25",
+      "respondedBy": "sreekar@pal.tech"
+    },
+    {
+      "id": "0a03",
+      "empId": "1742",
+      "email": "madhu.vemula@pal.tech",
+      "dayDifference": 2,
+      "status": "cancelled",
+      "leaveType": "unpaid",
+      "reason": "no",
+      "startDate": "2025-06-20",
+      "endDate": "2025-06-21",
+      "respondedBy": "sreekar@pal.tech"
     }
   ],
   "employees": [
@@ -92,15 +156,6 @@
       "role": "employee",
       "managerEmail": "suketh@pal.tech",
       "password": "rishi@pal"
-    },
-    {
-      "id": "c40d",
-      "empId": "1743",
-      "name": "harsha",
-      "email": "harsha.musku@pal.tech",
-      "role": "employee",
-      "managerEmail": "sreekar@pal.tech",
-      "password": "harsha@pal"
     }
   ]
 }

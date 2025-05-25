@@ -1,6 +1,6 @@
 import { ChangeEvent, useEffect, useState } from "react";
-import { Leave } from "../../Types";
-import { LeaveType, LeaveStatus } from "../../Types/enumTypes";
+import { Leave, ToastMessage } from "../../Types";
+import { LeaveType, LeaveStatus, ToastType, ToastContent, ActionType } from "../../Types/enumTypes";
 import { getUserFromSession } from "../../utils/roleUtils";
 import { convertFirstLetterToUpperCase } from "../../utils/leaveUtils";
 import FilterContainer from "../../components/common/FilterContainer";
@@ -12,7 +12,8 @@ import { useGetEmployeesByManagerQuery } from "../../services/employeeService";
 import { getUserMailFromSession } from "../../utils/roleUtils";
 import { ErrorMessages } from "../../utils/errorUtils";
 import { getLeaveStatusColumns } from "./LeaveStatusColumns";
-
+import { v4 as uuidv4 } from "uuid"
+import CustomToast from "../../components/layout/CustomToast";
 /**
  * @component LeaveStatus
  * @description Renders a table displaying leave requests for employees under a manager.
@@ -27,6 +28,12 @@ const LeaveStatusCard: React.FC = (): React.JSX.Element => {
     const [filterEmployeeLeaves, setFilterEmployeeLeaves] = useState<Leave[]>([]);
     const [leaveTypeFilter, setLeaveTypeFilter] = useState<string>(LeaveType.ALL)
     const [leaveStatusFilter, setLeaveStatusFilter] = useState<string>(LeaveStatus.ALL)
+    const [showToast, setShowToast] = useState<boolean>(false)
+    const [toastFields, setToastFields] = useState<ToastMessage>({
+        toastKey: uuidv4(),
+        message: '',
+        type: ToastType.INFO
+    })
 
     useEffect(() => {
         let result = [...employeeLeaves].reverse();
@@ -111,7 +118,17 @@ const LeaveStatusCard: React.FC = (): React.JSX.Element => {
                 <Modal
                     title={`Do you want to ${actionType} the request?`}
                     onClose={handleCancel}
-                    onSubmit={handleSubmit}
+                    onSubmit={() => {
+                        handleSubmit()
+                        setShowToast(true)
+                        setToastFields({
+                            ...toastFields,
+                            toastKey: uuidv4(),
+                            type: actionType === ActionType.APPROVE ? ToastType.ERROR : ToastType.ERROR,
+                            message: actionType === ActionType.APPROVE ? ToastContent.LEAVEAPPROVED :
+                                ToastContent.LEAVEREJECTED
+                        })
+                    }}
                     submitText={convertFirstLetterToUpperCase(actionType)}
                 >
                     <form className="modal-container">
@@ -120,6 +137,11 @@ const LeaveStatusCard: React.FC = (): React.JSX.Element => {
                     </form>
                 </Modal>
             )}
+            {showToast && <CustomToast
+                key={toastFields.toastKey}
+                message={toastFields.message}
+                type={toastFields.type}
+            />}
         </>
     )
 };
