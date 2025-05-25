@@ -1,17 +1,6 @@
 import React from "react"
 import ReactDOM from "react-dom"
-
-interface ModalProps {
-    title: string,
-    logoSrc?: string,
-    onClose: () => void,
-    onSubmit?: () => any,
-    children: React.ReactNode,
-    showFooter?: boolean,
-    submitText?: string,
-    cancelText?: string
-}
-
+import { ModalProps } from "../../Types"
 /**
  * A reusable modal component that renders its content as a React portal.
  * 

@@ -15,13 +15,11 @@ import { getLeaveColumns } from "./LeaveHistoryColumns";
 import CustomToast from "../../components/layout/CustomToast";
 import { v4 as uuidv4 } from "uuid"
 
-
 /**
  * @component LeaveHistory
  * @description Component to display and manage leave history for employees, managers, or HR.
  * @returns {React.JSX.Element}
  */
-
 
 const LeaveHistory = (): React.JSX.Element => {
     const user = getUserFromSession();

@@ -18,7 +18,7 @@ export enum LeaveStatus {
  * Enum representing types of leaves.
  */
 export enum LeaveType {
-    /**all leaves */
+    /** All leaves. */
     ALL = 'all',
     /** Paid leave. */
     PAID = "paid",
@@ -62,29 +62,52 @@ export enum DomainDetails {
 export enum ActionType {
     /** Modify action type. */
     MODIFY = 'modify',
+    /** Reject action type. */
     REJECT = 'reject',
+    /** Cancel action type. */
     CANCEL = 'cancel',
+    /** Approve action type. */
     APPROVE = "approve"
 }
 
+/**
+ * Enum representing leave balance configuration.
+ */
 export enum LeaveBalance {
+    /** Default leave balance. */
     BALANCE = 20
 }
 
+/**
+ * Enum containing toast notification messages.
+ */
 export enum ToastContent {
+    /** Success message for leave submission. */
     LEAVESUCCESS = "Leave Submitted Successfully",
+    /** Success message for leave cancellation. */
     LEAVECANCEL = "Leave Cancelled Successfully",
+    /** Success message for employee addition. */
     EMPLOYEESUCCESS = "Employee Added Successfully",
+    /** Success message for employee update. */
     EMPLOYEEUPDATED = "Employee Updated Successfully ",
+    /** Success message for employee deletion. */
     EMPLOYEEDELETED = "Employee Deleted Successfully",
+    /** Success message for leave approval. */
     LEAVEAPPROVED = "Leave Approved Successfully",
+    /** Success message for leave rejection. */
     LEAVEREJECTED = "Leave Rejected Successfully"
 }
 
+/**
+ * Enum representing types of toast notifications.
+ */
 export enum ToastType {
+    /** Success toast type. */
     SUCCESS = "success",
+    /** Error toast type. */
     ERROR = "error",
+    /** Info toast type. */
     INFO = "info",
+    /** Warning toast type. */
     WARNING = "warning"
-
 }

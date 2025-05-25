@@ -30,6 +30,7 @@ const AppRoutes: React.FC = (): React.JSX.Element => {
                     ))}
                 </Route>
             ))}
+            
             <Route path="*" element={<NotFound />} />
         </Routes>
     );

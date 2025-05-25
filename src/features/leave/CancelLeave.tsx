@@ -1,6 +1,6 @@
 import { useState, ChangeEvent } from "react";
 import { useUpdateLeaveByIdMutation } from "../../services/leaveService";
-import { Leave } from "../../Types";
+import { CancelLeaveProps } from "../../Types";
 import Modal from "../../components/common/CustomModal";
 import { LeaveStatus } from "../../Types/enumTypes";
 import { ErrorMessages } from "../../utils/errorUtils";
@@ -14,11 +14,7 @@ import { ErrorMessages } from "../../utils/errorUtils";
  * @component EmployeePopUp
  * @returns {React.JSX.Element} The employee popup component.
  */
-interface CancelLeaveProps {
-    cancelledLeaveItem: Leave | null,
-    onClose: () => void,
-    onSubmit: () => void
-}
+
 const CancelLeave: React.FC<CancelLeaveProps> = (props: CancelLeaveProps): React.JSX.Element => {
     const { cancelledLeaveItem, onClose, onSubmit } = props
     const [updateLeaveById] = useUpdateLeaveByIdMutation();

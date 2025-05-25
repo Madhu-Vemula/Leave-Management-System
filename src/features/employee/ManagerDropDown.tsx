@@ -1,12 +1,7 @@
-
 import { ChangeEvent, useState } from "react"
-import { Employee } from "../../Types"
+import { ManagerDropDownProps } from "../../Types"
 
-interface ManagerDropDownProps {
-    managerData: Employee[],
-    onSelect: (email: string) => void,
-    initialManagerMail: string
-}
+
 /**
  * A React functional component that renders a dropdown for selecting a manager's email.
  * It includes a search input field to filter manager emails and displays a list of matching results.

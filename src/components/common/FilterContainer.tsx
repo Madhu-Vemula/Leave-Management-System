@@ -1,5 +1,6 @@
 import React, { ChangeEvent } from "react";
 import { LeaveStatus, LeaveType } from "../../Types/enumTypes";
+import { FilterContainerProps } from "../../Types";
 /**
  * @description
  * Renders the filter container for leave type and status.
@@ -9,10 +10,7 @@ import { LeaveStatus, LeaveType } from "../../Types/enumTypes";
  * @returns {React.JSX.Element} The filter container component.
  */
 
-interface FilterContainerProps {
-    onLeaveStatusFilterChange: (leaveStatus: string) => void,
-    onLeaveTypeFilterChange: (leaveType: string) => void
-}
+
 const FilterContainer: React.FC<FilterContainerProps> = (props): React.JSX.Element => {
     const { onLeaveStatusFilterChange, onLeaveTypeFilterChange } = props
 

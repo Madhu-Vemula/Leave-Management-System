@@ -1,5 +1,5 @@
 import React, { useState, ChangeEvent } from "react";
-import { Employee, Leave } from "../../Types";
+import { Leave, LeaveFormProps } from "../../Types";
 import { LeaveType, LeaveStatus, LeaveBalance } from "../../Types/enumTypes";
 import palTechLogo from "../../assets/images/paltech_logo.png";
 import { useGetLeaveByUserQuery, useSubmitLeaveMutation, useUpdateLeaveByIdMutation, } from "../../services/leaveService";
@@ -18,12 +18,6 @@ import { ErrorMessages } from "../../utils/errorUtils";
 /**
  * @description Props for rendering employee data.
  */
-interface LeaveFormProps {
-    employeeData: Employee,
-    initialLeaveData: Leave | null,
-    onClose: () => void,
-    onSubmit: () => void
-}
 
 const LeaveForm: React.FC<LeaveFormProps> = (props: LeaveFormProps): React.JSX.Element => {
     const { employeeData,

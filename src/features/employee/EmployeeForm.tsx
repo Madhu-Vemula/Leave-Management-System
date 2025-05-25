@@ -1,5 +1,5 @@
 import { ChangeEvent, useState } from "react";
-import { Employee } from "../../Types";
+import { Employee, EmployeeFormProps } from "../../Types";
 import {
   useAddEmployeeMutation,
   useUpdateEmployeeMutation,
@@ -22,11 +22,7 @@ import ManagerDropDown from "./ManagerDropDown";
  * API integration, and error handling. It supports controlled inputs for fields like ID, name, email, password, role, and manager.
  * @returns {React.JSX.Element} A JSX form element for employee input.
  */
-interface EmployeeFormProps {
-  initialEmployeeData: Employee | null,
-  onClose: () => void,
-  onSubmit: () => void
-}
+
 const EmployeeForm: React.FC<EmployeeFormProps> = (props: EmployeeFormProps): React.JSX.Element => {
   const { initialEmployeeData, onClose, onSubmit } = props
   const [addEmployee] = useAddEmployeeMutation();

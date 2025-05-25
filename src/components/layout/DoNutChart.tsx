@@ -1,5 +1,6 @@
 import { PieChart, Pie, Cell } from "recharts";
 import { useState } from "react";
+import { DonutChartProps } from "../../Types";
 /** 
  * Renders a donut chart to visualize the number of paid and unpaid leaves.
  *
@@ -9,20 +10,6 @@ import { useState } from "react";
  * @param {DonutChartProps} props - Contains leave type data including paid and unpaid leaves.
  * @returns {React.JSX.Element} A styled donut chart component.
  */
-
-export interface DonutDataItem {
-    name: string;
-    value: number;
-    color?: string;
-}
-
-export interface DonutChartProps {
-    data: DonutDataItem[];
-    width?: number;
-    height?: number;
-    outerRadius?: number;
-    innerRadius?: number;
-}
 
 const defaultColors = [
     "#8884d8", "#82ca9d", "#ffc658", "#ff7f50", "#a0522d", "#20b2aa", "#6a5acd"

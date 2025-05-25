@@ -3,22 +3,49 @@ import { ColumnDefinition, Leave } from "../../Types";
 import { ActionType, LeaveStatus } from "../../Types/enumTypes";
 import { convertFirstLetterToUpperCase, convertToUIStatus } from "../../utils/leaveUtils";
 
+/**
+ * @function getLeaveStatusColumns
+ * @description Generates column definitions for a leave status table with action handlers
+ * 
+ * @param {(e: ChangeEvent<HTMLSelectElement>, leave: Leave) => void} handleActionsTypes - 
+ * Callback function to handle action selection changes
+ * 
+ * @returns {ColumnDefinition<Leave>[]} Array of column definitions for the leave status table
+ * 
+ * @example
+ * const columns = getLeaveStatusColumns((e, leave) => {
+ *   console.log(`Action ${e.target.value} selected for leave ${leave.id}`);
+ * });
+ */
 export const getLeaveStatusColumns = (
     handleActionsTypes: (e: ChangeEvent<HTMLSelectElement>, leave: Leave) => void
 ): ColumnDefinition<Leave>[] => {
+    /**
+     * @constant baseColumns
+     * @type {ColumnDefinition<Leave>[]}
+     * @description Base column configuration for leave status table
+     */
     const baseColumns: ColumnDefinition<Leave>[] = [
-        { header: "Employee Id", accessor: "empId" },
-        { header: "Employee Email", accessor: "email" },
+        {
+            header: "Employee Id",
+            accessor: "empId"
+        },
+        {
+            header: "Employee Email",
+            accessor: "email"
+        },
         {
             header: "Leave Type",
-            render: (item) =>
-                convertFirstLetterToUpperCase((item.leaveType))
+            render: (item) => convertFirstLetterToUpperCase(item.leaveType)
         },
         {
             header: "Date",
-            render: (row) => (`${row.startDate} to ${row.endDate}`)
+            render: (row) => `${row.startDate} to ${row.endDate}`
         },
-        { header: "Reason", accessor: "reason" },
+        {
+            header: "Reason",
+            accessor: "reason"
+        },
         {
             header: "Status",
             render: (row) => (
@@ -50,6 +77,7 @@ export const getLeaveStatusColumns = (
                 </button>
             )
         },
-    ]
-    return baseColumns
-}
+    ];
+
+    return baseColumns;
+};
