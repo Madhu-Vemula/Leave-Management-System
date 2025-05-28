@@ -1,5 +1,5 @@
-import { ChangeEvent } from "react";
-import { ColumnDefinition, Leave } from "../../Types";
+import { type ChangeEvent } from "react";
+import type { ColumnDefinition, Leave } from "../../Types";
 import { ActionType, LeaveStatus, RoleType } from "../../Types/enumTypes";
 import { convertFirstLetterToUpperCase, convertToUIStatus } from "../../utils/leaveUtils";
 
@@ -12,7 +12,7 @@ import { convertFirstLetterToUpperCase, convertToUIStatus } from "../../utils/le
  *        Callback function to handle leave modification actions
  * 
  * @returns {ColumnDefinition<Leave>[]} Array of column configurations for the leave table
-**/ 
+**/
 
 export const getLeaveColumns = (
     role: string,
@@ -88,4 +88,4 @@ export const getLeaveColumns = (
     }
 
     return baseColumns;
-};
+}

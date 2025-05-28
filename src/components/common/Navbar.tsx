@@ -3,11 +3,11 @@ import palTechLogoNew from "../../assets/images/paltech_logo_new.svg";
 import navCrossIcon from "../../assets/icons/cross-icon.png";
 import navBarIcon from "../../assets/icons/nav-bar-icon.svg";
 import { getUserMailFromSession, getUserRoleFromSession } from "../../utils/roleUtils";
-import { useState } from "react";
+import React, { useState } from "react";
 import { RoleType } from "../../Types/enumTypes";
 import { convertFirstLetterToUpperCase } from "../../utils/leaveUtils";
 import { useGetEmployeeByMailQuery } from "../../services/employeeService";
-import Loader from "../layout/Loader";
+import Loader from "./Loader";
 
 /** 
  * @description
@@ -18,7 +18,7 @@ import Loader from "../layout/Loader";
  * @component Navbar
  * @returns {React.JSX.Element} The rendered Navbar component.
  */
-const Navbar: React.FC = (): React.JSX.Element => {
+const Navbar: React.FC = (): React.JSX.Element => { 
     const userRole = getUserRoleFromSession();
     const userEmail = getUserMailFromSession()
     const navigate = useNavigate();
@@ -97,4 +97,4 @@ const Navbar: React.FC = (): React.JSX.Element => {
     );
 };
 
-export default Navbar;
+export default React.memo(Navbar)

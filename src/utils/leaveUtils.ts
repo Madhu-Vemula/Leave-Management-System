@@ -1,4 +1,4 @@
-import { Leave, LeaveTypes } from "../Types";
+import type { Leave, LeaveTypes } from "../Types";
 
 import { LeaveType, LeaveStatus } from "../Types/enumTypes";
 import { ErrorMessages } from "./errorUtils";

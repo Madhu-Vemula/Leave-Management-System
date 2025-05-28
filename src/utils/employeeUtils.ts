@@ -1,4 +1,4 @@
-import { Employee } from "../Types";
+import type { Employee } from "../Types";
 
 /**
  * @description Checks if the given employee ID already exists in the list of employees.

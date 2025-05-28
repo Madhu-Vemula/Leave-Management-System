@@ -1,11 +1,11 @@
-import React, { useState, ChangeEvent } from "react";
-import { Leave, LeaveFormProps } from "../../Types";
-import { LeaveType, LeaveStatus, LeaveBalance } from "../../Types/enumTypes";
+import React, { useState, type ChangeEvent } from "react";
+import type { Leave, LeaveFormProps } from "../../Types";
+import { LeaveType, LeaveStatus, LeaveBalance, LeaveFormVariables } from "../../Types/enumTypes";
 import palTechLogo from "../../assets/images/paltech_logo.png";
 import { useGetLeaveByUserQuery, useSubmitLeaveMutation, useUpdateLeaveByIdMutation, } from "../../services/leaveService";
 import { getUserFromSession, getUserMailFromSession, } from "../../utils/roleUtils";
 import { calculateLeaveTypes, checkDuplicatedLeaves, compareUpdatedData, } from "../../utils/leaveUtils";
-import Modal from "../../components/common/CustomModal";
+import Modal from "../../components/layout/CustomModal";
 import { ErrorMessages } from "../../utils/errorUtils";
 /**
  * @component LeaveForm
@@ -20,8 +20,11 @@ import { ErrorMessages } from "../../utils/errorUtils";
  */
 
 const LeaveForm: React.FC<LeaveFormProps> = (props: LeaveFormProps): React.JSX.Element => {
-    const { employeeData,
-        initialLeaveData, onClose, onSubmit } = props
+    const {
+        employeeData,
+        initialLeaveData,
+        onClose,
+        onSubmit } = props
 
     const userEmail = getUserMailFromSession();
     const [submitLeave] = useSubmitLeaveMutation();
@@ -204,7 +207,7 @@ const LeaveForm: React.FC<LeaveFormProps> = (props: LeaveFormProps): React.JSX.E
                 <label htmlFor="reason">
                     Reason<span className="required">*</span>
                 </label>
-                <textarea maxLength={20} id="reason" value={leaveForm.reason} onChange={handleReason}></textarea>
+                <textarea maxLength={LeaveFormVariables.REASONMAXLENGTH} id="reason" value={leaveForm.reason} onChange={handleReason}></textarea>
                 {hasError && !leaveForm.reason && (<span className="error-message">Field is required</span>)}
                 {errorMessage && <span className="error-message">{errorMessage}</span>}
             </div>

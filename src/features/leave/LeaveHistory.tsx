@@ -1,19 +1,22 @@
-import { ChangeEvent, useEffect, useState } from "react";
-import { Leave, ToastMessage } from "../../Types";
+import { type ChangeEvent, useCallback, useEffect, useMemo, useState } from "react";
+import type { Leave, ToastMessage } from "../../Types";
 import { ActionType, LeaveStatus, LeaveType, RoleType, ToastContent, ToastType } from "../../Types/enumTypes";
-import { useLazyGetLeaveByUserQuery, useLazyGetLeavesQuery } from "../../services/leaveService";
+import {  useLazyGetLeaveByUserQuery, useLazyGetLeavesQuery } from "../../services/leaveService";
 import { getUserFromSession, getUserMailFromSession } from "../../utils/roleUtils";
 import { convertFirstLetterToUpperCase } from "../../utils/leaveUtils";
 import FilterContainer from "../../components/common/FilterContainer";
 import Navbar from "../../components/common/Navbar";
 import LeaveForm from "../../features/leave/LeaveForm";
 import { useGetEmployeeByMailQuery } from "../../services/employeeService";
-import { CustomTable } from "../../components/common/CustomTable";
+import CustomTable from "../../components/layout/CustomTable";
 import CancelLeave from "./CancelLeave";
 import { ErrorMessages } from "../../utils/errorUtils";
 import { getLeaveColumns } from "./LeaveHistoryColumns";
 import CustomToast from "../../components/layout/CustomToast";
 import { v4 as uuidv4 } from "uuid"
+import CardSection from "../../components/layout/CardSection";
+import DashboardBlock from "../../components/layout/DashboardBlock";
+
 
 /**
  * @component LeaveHistory
@@ -86,7 +89,7 @@ const LeaveHistory = (): React.JSX.Element => {
      * @param {ChangeEvent<HTMLSelectElement>} event - The change event from the action select dropdown.
      * @param {Leave} item - The selected leave item for modification or cancellation.
      */
-    const handleModifyLeave = (event: ChangeEvent<HTMLSelectElement>, item: Leave): void => {
+    const handleModifyLeave = useCallback((event: ChangeEvent<HTMLSelectElement>, item: Leave): void => {
         const modifyValue = event.target.value;
         setInitialLeaveData(item)
         if (modifyValue === ActionType.MODIFY) {
@@ -94,30 +97,64 @@ const LeaveHistory = (): React.JSX.Element => {
         } else {
             setshowCancelLeaveModal(true)
         }
-    }
+    }, [])
 
+    /**
+  * @function showLeavePopUp
+  * @description Controls the visibility of the leave form modal and resets initial leave data
+  * @param {boolean} value - Boolean value to show/hide the leave form modal
+  * @returns {void}
+  */
     const showLeavePopUp = (value: boolean): void => {
-        setShowLeaveFormModal(value)
-        setInitialLeaveData(null)
-    }
+        setShowLeaveFormModal(value);
+        setInitialLeaveData(null);
+    };
 
+    /**
+     * @function handleLeaveStatusFilter
+     * @description Memoized callback to update the leave status filter
+     * @param {string} leaveStatus - The leave status to filter by
+     * @returns {void}
+     */
+    const handleLeaveStatusFilter = useCallback((leaveStatus: string): void => {
+        setLeaveStatusFilter(leaveStatus);
+    }, []);
+
+    /**
+     * @function handleLeaveTypeFilter
+     * @description Memoized callback to update the leave type filter
+     * @param {string} leaveType - The leave type to filter by (e.g., 'paid', 'unpaid')
+     * @returns {void}
+     */
+    const handleLeaveTypeFilter = useCallback((leaveType: string): void => {
+        setLeaveTypeFilter(leaveType);
+    }, []);
+
+    /**
+     * @constant memoizedLeaveColumns
+     * @description Memoized leave columns configuration based on user role
+     * @type {ColumnDefinition<Leave>[]}
+     */
+    const memoizedLeaveColumns = useMemo(() => (
+        getLeaveColumns(authRole ?? '', handleModifyLeave)
+    ), [authRole, handleModifyLeave]);
     return (
         <>
             <Navbar />
-            <div className='employee-container'>
-                <h1>{convertFirstLetterToUpperCase(authRole ?? "")} Dashboard</h1>
-                <div className="list-container">
-                    <h2>{authRole !== RoleType.HR ? "My" : "Employees"} leave history</h2>
+            <DashboardBlock
+                title={`${convertFirstLetterToUpperCase(authRole ?? "")} Dashboard`}>
+                <CardSection
+                    title={`${authRole !== RoleType.HR ? "My" : "Employees"} leave history`}
+                >
                     <FilterContainer
-                        onLeaveStatusFilterChange={(leaveStatus: string) => setLeaveStatusFilter(leaveStatus)}
-                        onLeaveTypeFilterChange={(leaveType: string) => setLeaveTypeFilter(leaveType)}
+                        onLeaveStatusFilterChange={handleLeaveStatusFilter}
+                        onLeaveTypeFilterChange={handleLeaveTypeFilter}
                     />
-
                     <CustomTable
                         data={filteredLeaves}
-                        columns={getLeaveColumns(authRole ?? '', handleModifyLeave)}
+                        columns={memoizedLeaveColumns}
                     />
-                </div>
+                </CardSection>
                 {authRole !== RoleType.HR &&
                     <button
                         type="button"
@@ -127,7 +164,7 @@ const LeaveHistory = (): React.JSX.Element => {
                         Request Leave
                     </button>
                 }
-            </div>
+            </DashboardBlock>
             {showLeaveFormModal && (
                 <LeaveForm
                     employeeData={employeeData[0]}

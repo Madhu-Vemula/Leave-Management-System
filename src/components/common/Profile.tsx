@@ -1,6 +1,7 @@
-import { ProfileProps } from "../../Types";
+import type { ProfileProps } from "../../Types";
 import palTechProfile from "../../assets/images/paltech-profile.jpg";
 import { convertFirstLetterToUpperCase } from "../../utils/leaveUtils";
+import CardSection from "../layout/CardSection";
 
 /** 
  * @description
@@ -14,8 +15,9 @@ import { convertFirstLetterToUpperCase } from "../../utils/leaveUtils";
  */
 const Profile: React.FC<ProfileProps> = ({ employeeData }: ProfileProps): React.JSX.Element => {
     return (
-        <div className="profile-containter">
-            <h2>My profile</h2>
+        <CardSection
+            title="My profile"
+        >
             <div className="profile-header">
                 <img src={palTechProfile} alt="paltech-profile" className="company-profile-image" />
                 <div>
@@ -26,7 +28,7 @@ const Profile: React.FC<ProfileProps> = ({ employeeData }: ProfileProps): React.
                     <p><b>Reporting To: </b>{employeeData.managerEmail}</p>
                 </div>
             </div>
-        </div>
+        </CardSection>
     )
 };
 

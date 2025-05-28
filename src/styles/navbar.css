@@ -27,7 +27,7 @@
 .nav-link {
     text-decoration: none;
     color: var(--primary-font-color);
-    font-size: 1.125rem;
+    font-size: 1.0625rem;
 }
 
 .nav-link.active {

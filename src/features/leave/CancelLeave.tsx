@@ -1,8 +1,8 @@
-import { useState, ChangeEvent } from "react";
+import { useState, type ChangeEvent } from "react";
 import { useUpdateLeaveByIdMutation } from "../../services/leaveService";
-import { CancelLeaveProps } from "../../Types";
-import Modal from "../../components/common/CustomModal";
-import { LeaveStatus } from "../../Types/enumTypes";
+import type { CancelLeaveProps } from "../../Types";
+import Modal from "../../components/layout/CustomModal";
+import { LeaveFormVariables, LeaveStatus } from "../../Types/enumTypes";
 import { ErrorMessages } from "../../utils/errorUtils";
 
 /** 
@@ -83,7 +83,7 @@ const CancelLeave: React.FC<CancelLeaveProps> = (props: CancelLeaveProps): React
                     Reason<span className="required">*</span>
                 </label>
                 <textarea
-                    maxLength={20}
+                    maxLength={LeaveFormVariables.REASONMAXLENGTH}
                     id="reason"
                     value={cancelReason}
                     onChange={(e) => handleReasonText(e)}

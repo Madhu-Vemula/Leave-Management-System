@@ -83,19 +83,19 @@ export enum LeaveBalance {
  */
 export enum ToastContent {
     /** Success message for leave submission. */
-    LEAVESUCCESS = "Leave Submitted Successfully",
+    LEAVESUCCESS = "Leave Submitted",
     /** Success message for leave cancellation. */
-    LEAVECANCEL = "Leave Cancelled Successfully",
+    LEAVECANCEL = "Leave Cancelled",
     /** Success message for employee addition. */
-    EMPLOYEESUCCESS = "Employee Added Successfully",
+    EMPLOYEESUCCESS = "Employee Added",
     /** Success message for employee update. */
-    EMPLOYEEUPDATED = "Employee Updated Successfully ",
+    EMPLOYEEUPDATED = "Employee Updated ",
     /** Success message for employee deletion. */
-    EMPLOYEEDELETED = "Employee Deleted Successfully",
+    EMPLOYEEDELETED = "Employee Deleted",
     /** Success message for leave approval. */
-    LEAVEAPPROVED = "Leave Approved Successfully",
+    LEAVEAPPROVED = "Leave Approved",
     /** Success message for leave rejection. */
-    LEAVEREJECTED = "Leave Rejected Successfully"
+    LEAVEREJECTED = "Leave Rejected"
 }
 
 /**
@@ -110,4 +110,8 @@ export enum ToastType {
     INFO = "info",
     /** Warning toast type. */
     WARNING = "warning"
+} 
+
+export enum LeaveFormVariables{
+    REASONMAXLENGTH=20
 }

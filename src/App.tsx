@@ -5,7 +5,7 @@ import { Provider } from 'react-redux';
 import { store } from "../src/store/store"
 import "../src/styles/buttons.css"
 import "../src/styles/form-container.css"
-import "../src/styles/custom-model.css"
+import "../src/styles/custom-modal.css"
 import "../src/styles/custom-table.css"
 import "../src/styles/filter-container.css"
 import "../src/styles/loader.css"

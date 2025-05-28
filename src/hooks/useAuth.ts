@@ -1,5 +1,5 @@
 import { useLazyGetEmployeeByMailQuery } from "../services/employeeService";
-import { User } from "../Types";
+import type { User } from "../Types";
 
 /**
  * Custom authentication hook for handling user login

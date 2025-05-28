@@ -1,4 +1,4 @@
-import { User } from "../Types";
+import type { User } from "../Types";
 
 /** 
  * @description

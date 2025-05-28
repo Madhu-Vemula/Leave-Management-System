@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
-const baseUrl = process.env.REACT_APP_BASE_URL || "http://localhost:3000";
+const baseUrl = "http://localhost:3000"
 
 /**
  * The `rootApi` is an instance of `createApi` from Redux Toolkit Query (RTK Query).
@@ -23,6 +23,6 @@ const rootApi = createApi({
     reducerPath: "rootApi",
     baseQuery: fetchBaseQuery({ baseUrl }),
     tagTypes: ["Employee", 'Leave'],
-    endpoints: (builder) => ({})
+    endpoints: () => ({})
 })
 export default rootApi

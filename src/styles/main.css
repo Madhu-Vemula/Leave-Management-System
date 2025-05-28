@@ -22,11 +22,7 @@ body {
     font-family: sans-serif;
 }
 
-
-.leave-balance-card,
-.profile-containter,
-.leave-history-container,
-.list-container {
+.cardsection-container {
     box-shadow: 0 0 0.625rem var(--box-shadow-color);
     padding: 1.5rem;
     border-radius: 0.825rem;
@@ -34,11 +30,15 @@ body {
     margin-bottom: 1rem;
 }
 
+.dashboard-block-container {
+    padding: 0rem 1rem;
+}
+
+.dashboard-block-container h1 {
+    color: var(--primary-color);
+}
 
 @media (min-width:960px) {
-    .profile-containter {
-        margin-right: 2rem;
-    }
 
     .mobile-navbar,
     .nav-bar-icon {
@@ -47,13 +47,9 @@ body {
 }
 
 @media (max-width:960px) {
-
-    .profile-containter {
-        margin-bottom: 1rem;
-    }
-
     .employee-header {
         flex-wrap: wrap;
+        row-gap: 1rem;
     }
 
     .company-cover-image {

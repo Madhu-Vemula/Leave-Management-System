@@ -1,5 +1,5 @@
-import { ChangeEvent, useState } from "react";
-import { Employee, EmployeeFormProps } from "../../Types";
+import { type ChangeEvent, useState } from "react";
+import type { Employee, EmployeeFormProps } from "../../Types";
 import {
   useAddEmployeeMutation,
   useUpdateEmployeeMutation,
@@ -11,7 +11,7 @@ import {
   checkDuplicateEmployeeEmails,
   checkDuplicateEmployeeIds
 } from "../../utils/employeeUtils";
-import Modal from "../../components/common/CustomModal";
+import Modal from "../../components/layout/CustomModal";
 import { ErrorMessages } from "../../utils/errorUtils";
 import { DomainDetails, HrDetails, RoleType } from "../../Types/enumTypes";
 import ManagerDropDown from "./ManagerDropDown";

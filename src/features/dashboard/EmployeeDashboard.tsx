@@ -1,11 +1,12 @@
 import Navbar from "../../components/common/Navbar";
 import { useGetLeaveByUserQuery } from "../../services/leaveService";
-import LeaveBalanceCard from "../leave/LeaveBalanceCard";
+import LeaveBalanceCard from "../../components/common/LeaveBalanceCard";
 import Profile from "../../components/common/Profile";
 import { useGetEmployeeByMailQuery } from "../../services/employeeService";
 import { getUserMailFromSession, getUserRoleFromSession } from "../../utils/roleUtils";
-import Loader from "../../components/layout/Loader";
+import Loader from "../../components/common/Loader";
 import { convertFirstLetterToUpperCase } from "../../utils/leaveUtils"
+import DashboardBlock from "../../components/layout/DashboardBlock";
 
 /**
  * @component EmployeeDashboard
@@ -26,13 +27,14 @@ const EmployeeDashboard: React.FC = (): React.JSX.Element => {
     return (
         <>
             <Navbar />
-            <div className='employee-container'>
-                <h1>{convertFirstLetterToUpperCase(userRole)} Dashboard</h1>
+            <DashboardBlock
+                title={`${convertFirstLetterToUpperCase(userRole)} Dashboard`}
+            >
                 <div className="employee-header">
                     <Profile employeeData={employeeData[0]} />
                     <LeaveBalanceCard leaveData={leaveData} />
                 </div>
-            </div>
+            </DashboardBlock>
         </>
     );
 };

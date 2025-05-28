@@ -1,9 +1,9 @@
-import { ChangeEvent, useEffect, useState } from "react";
+import { type ChangeEvent, useEffect, useState } from "react";
 import palTechLogo from "../assets/images/paltech_logo.png";
 import palTechCover from "../assets/images/paltech_cover.jpeg";
 import { useNavigate } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
-import { LoginForm } from "../Types";
+import type { LoginForm } from "../Types";
 import { HrDetails, RoleType } from "../Types/enumTypes";
 import { ErrorMessages } from "../utils/errorUtils";
 import { getUserFromSession } from "../utils/roleUtils";

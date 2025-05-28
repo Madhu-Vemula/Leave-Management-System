@@ -1,5 +1,5 @@
 import { Navigate } from "react-router-dom";
-import { ProtectedRouteProps } from "../Types";
+import type { ProtectedRouteProps } from "../Types";
 import { getUserFromSession } from "../utils/roleUtils";
 import UnAuthorized from "../pages/UnAuthorized";
 /**

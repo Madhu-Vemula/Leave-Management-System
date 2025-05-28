@@ -1,15 +1,18 @@
 import { useGetEmployeesQuery, useRemoveEmployeeMutation } from "../../services/employeeService";
-import { Employee, ToastMessage } from "../../Types";
+import type { Employee, ToastMessage } from "../../Types";
 import { useDeleteLeavesByIdMutation, useLazyGetLeaveByUserQuery } from "../../services/leaveService";
 import EmployeeForm from "../employee/EmployeeForm";
-import { useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import Navbar from "../../components/common/Navbar";
-import { CustomTable } from "../../components/common/CustomTable";
+import CustomTable from "../../components/layout/CustomTable";
 import { ErrorMessages } from "../../utils/errorUtils";
 import { getEmployeeColumns } from "../employee/EmployeeColumns";
 import { v4 as uuidv4 } from "uuid"
 import { ToastContent, ToastType } from "../../Types/enumTypes";
 import CustomToast from "../../components/layout/CustomToast";
+import Modal from "../../components/layout/CustomModal";
+import CardSection from "../../components/layout/CardSection";
+import DashboardBlock from "../../components/layout/DashboardBlock";
 /**
  * @component EmployeeList
  * @description Renders a table of all employees, with options to edit or remove employees.
@@ -22,8 +25,9 @@ const HrDashboard: React.FC = (): React.JSX.Element => {
     const [removeEmployee] = useRemoveEmployeeMutation();
     const [deleteLeavesById] = useDeleteLeavesByIdMutation();
     const [getLeavesByUser] = useLazyGetLeaveByUserQuery();
-    const [initialEmployeeData, setInitialEmployeeData] = useState<Employee | null>(null)
+    const [selectedEmployee, setSelectedEmployee] = useState<Employee | null>(null)
     const [showEmployeeFormModal, setShowEmployeeFormModal] = useState<boolean>(false)
+    const [showRemoveEmployeeModal, setShowRemoveEmployeeModal] = useState<boolean>(false)
     const [showToast, setShowToast] = useState<boolean>(false)
     const [toastFields, setToastFields] = useState<ToastMessage>({
         toastKey: uuidv4(),
@@ -36,41 +40,79 @@ const HrDashboard: React.FC = (): React.JSX.Element => {
      * @param {Employee} employee - The employee object to be edited.
      * @returns {void}
      */
-    const handleEditEmployee = (employee: Employee): void => {
+    const handleEditEmployee = useCallback((employee: Employee): void => {
         setShowEmployeeFormModal(true)
-        setInitialEmployeeData(employee)
-    };
+        setSelectedEmployee(employee)
+    }, [])
+
+
+        /**
+     * @function handleRemoveEmployee
+     * @description Handles the initiation of employee removal by:
+     *              - Showing the confirmation modal
+     *              - Setting the employee to be removed in state
+     * @param {Employee} employee - The employee object marked for removal
+     * @returns {void}
+     */
+    const handleRemoveEmployee = useCallback((employee: Employee): void => {
+        setShowRemoveEmployeeModal(true);
+        setSelectedEmployee(employee);
+    }, []);
 
     /**
-     * @function handleRemoveEmployee
-     * @description Handles the removal of an employee and associated leave records.
-     * Performs a cascade delete: first the employee, then their leave records (if any).
-     * @param {Employee} employee - The employee object to be removed.
-     * @returns {Promise<void>} A promise indicating completion.
+     * @function deleteEmployeeData
+     * @description Performs complete employee deletion including:
+     *              - Fetching all associated leaves
+     *              - Removing employee record
+     *              - Cleaning up all related leaves
+     *              - Handling success/error states
+     *              - Managing UI feedback (toast notifications)
+     * @returns {Promise<void>}
+     * @throws {Error} When any deletion operation fails
      */
-    const handleRemoveEmployee = async (employee: Employee): Promise<void> => {
-        try {
-            const leaves = await getLeavesByUser(employee.email).unwrap();
+    const deleteEmployeeData = async (): Promise<void> => {
+        if (!selectedEmployee) {
+            console.warn('No employee selected for deletion');
+            return;
+        }
 
-            await removeEmployee(employee.id).unwrap();
+        try {
+            const leaves = await getLeavesByUser(selectedEmployee.email).unwrap();
+
+            await removeEmployee(selectedEmployee.id).unwrap();
 
             await Promise.all(
                 leaves.map(async (leave) => {
-                    const response = await deleteLeavesById(leave.id ?? '');
-                    console.log(response);
+                    if (leave.id) {
+                        const response = await deleteLeavesById(leave.id);
+                        console.log('Leave deletion response:', response);
+                    }
                 })
             );
+
+            setShowToast(true);
+            setToastFields({
+                ...toastFields,
+                toastKey: uuidv4(),
+                message: ToastContent.EMPLOYEEDELETED,
+                type: ToastType.SUCCESS
+            });
+
         } catch (error) {
-            alert(ErrorMessages.CatchError + { error });
+            console.error('Employee deletion failed:', error);
+
+            setToastFields({
+                ...toastFields,
+                toastKey: uuidv4(),
+                message: `${ErrorMessages.CatchError}: ${error}`,
+                type: ToastType.ERROR
+            });
+
+            alert(`${ErrorMessages.CatchError}\n${error}`);
+        } finally {
+            setShowRemoveEmployeeModal(false);
         }
-        setShowToast(true)
-        setToastFields({
-            ...toastFields,
-            toastKey: uuidv4(),
-            message: ToastContent.EMPLOYEEDELETED,
-            type: ToastType.ERROR
-        })
-    };
+    }
     /**
         * @function handleAddEmployee
         * @description Opens the employee form popup and resets initial employee form data.
@@ -78,23 +120,33 @@ const HrDashboard: React.FC = (): React.JSX.Element => {
         */
 
     const handleAddEmployee = (): void => {
-        setInitialEmployeeData(null)
+        setSelectedEmployee(null)
         setShowEmployeeFormModal(true)
-    };
+    }
+
+    /**
+     * @constant memoizedEmployeeColumns
+     * @description Memoized Employee columns 
+     * @type {ColumnDefinition<Leave>[]}
+     */
+    const memoizedEmployeeColumns = useMemo(() => (
+        getEmployeeColumns(handleEditEmployee, handleRemoveEmployee)
+    ), [handleEditEmployee, handleRemoveEmployee])
 
     return (
         <>
             <Navbar />
-            <div className={`employee-container`}>
-                <h1>HR Dashboard</h1>
-                <div className="list-container">
-                    <h2>Employees List</h2>
+            <DashboardBlock
+                title="Hr Dashboard"
+            >
+                <CardSection
+                    title="Employees List"
+                >
                     <CustomTable
                         data={employeeData}
-                        columns={getEmployeeColumns(handleEditEmployee, handleRemoveEmployee)}
+                        columns={memoizedEmployeeColumns}
                     />
-                </div>
-
+                </CardSection>
                 <button
                     type="button"
                     className="button add-btn"
@@ -102,9 +154,9 @@ const HrDashboard: React.FC = (): React.JSX.Element => {
                 >
                     Add Employee
                 </button>
-            </div>
+            </DashboardBlock>
             {showEmployeeFormModal && <EmployeeForm
-                initialEmployeeData={initialEmployeeData}
+                initialEmployeeData={selectedEmployee}
                 onClose={() => setShowEmployeeFormModal(false)}
                 onSubmit={() => {
                     setShowEmployeeFormModal(false)
@@ -112,11 +164,22 @@ const HrDashboard: React.FC = (): React.JSX.Element => {
                     setToastFields({
                         ...toastFields,
                         toastKey: uuidv4(),
-                        message: initialEmployeeData ? ToastContent.EMPLOYEEUPDATED : ToastContent.EMPLOYEESUCCESS,
+                        message: selectedEmployee ? ToastContent.EMPLOYEEUPDATED : ToastContent.EMPLOYEESUCCESS,
                         type: ToastType.SUCCESS
                     })
                 }}
             />}
+            {showRemoveEmployeeModal && (
+                <Modal
+                    title="Do you want to remove the employee?"
+                    onClose={() => setShowRemoveEmployeeModal(false)}
+                    onSubmit={deleteEmployeeData}
+                    submitText="Remove"
+                >
+                    <></>
+                </Modal>
+            )
+            }
             {showToast && <CustomToast
                 key={toastFields.toastKey}
                 message={toastFields.message}

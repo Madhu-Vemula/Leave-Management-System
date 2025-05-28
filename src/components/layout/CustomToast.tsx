@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { CustomToastProps } from '../../Types';
+import type { CustomToastProps } from '../../Types';
 
 /**
  * @component CustomToast
@@ -14,26 +14,18 @@ import { CustomToastProps } from '../../Types';
  * 
  * @returns {React.ReactElement} A ToastContainer element that manages toast notifications
  */
-const CustomToast: React.FC<CustomToastProps> = ({ 
-    message, 
-    type, 
-    duration = 3000 
-}: CustomToastProps) => { 
+const CustomToast: React.FC<CustomToastProps> = ({
+    message,
+    type,
+    duration = 3000
+}: CustomToastProps) => {
     /**
      * @effect
      * @description Displays the toast notification whenever the message, type, or duration changes.
      * Uses the react-toastify library's toast function to show notifications.
      */
     useEffect(() => {
-        toast[type](message, { 
-            autoClose: duration,
-            position: "top-right",
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-        });
+        toast[type](message);
     }, [type, message, duration]);
 
     return (

@@ -1,4 +1,4 @@
-import { Employee } from "../Types";
+import type { Employee } from "../Types";
 import rootApi from "./rootService";
 
 /**

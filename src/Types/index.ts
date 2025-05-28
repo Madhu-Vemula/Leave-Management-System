@@ -310,3 +310,29 @@ export interface ModalProps {
   submitText?: string,
   cancelText?: string
 }
+ 
+/**
+ * @interface CardSectionProps
+ * @description Props for a CardSection component that typically contains a title and content area.
+ * Commonly used for grouping related content with a visible header.
+ * 
+ * @property {string} title - The title text displayed at the top of the CardSection
+ * @property {React.ReactNode} children - The content to be rendered inside the CardSection body
+ */
+export interface CardSectionProps {
+  title: string;
+  children: React.ReactNode;
+}
+
+/**
+* @interface DashboardBlockProps
+* @description Props for a dashboard block component that displays a titled content section.
+* Similar to CardSectionProps but typically used specifically in dashboard layouts.
+* 
+* @property {string} title - The heading text for this dashboard block
+* @property {React.ReactNode} children - The content to render within the dashboard block
+*/
+export interface DashboardBlockProps {
+  title: string;
+  children: React.ReactNode;
+}

@@ -1,5 +1,5 @@
-import { ChangeEvent } from "react";
-import { ColumnDefinition, Leave } from "../../Types";
+import { type ChangeEvent } from "react";
+import type { ColumnDefinition, Leave } from "../../Types";
 import { ActionType, LeaveStatus } from "../../Types/enumTypes";
 import { convertFirstLetterToUpperCase, convertToUIStatus } from "../../utils/leaveUtils";
 

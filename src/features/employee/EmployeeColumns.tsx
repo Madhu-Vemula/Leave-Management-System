@@ -1,4 +1,4 @@
-import { ColumnDefinition, Employee } from "../../Types";
+import type { ColumnDefinition, Employee } from "../../Types";
 import { convertFirstLetterToUpperCase } from "../../utils/leaveUtils";
 
 /**
@@ -12,7 +12,7 @@ import { convertFirstLetterToUpperCase } from "../../utils/leaveUtils";
  */
 export const getEmployeeColumns = (
     handleEditEmployee: (employee: Employee) => void,
-    handleRemoveEmployee: (employee: Employee) => Promise<void>
+    handleRemoveEmployee: (employee: Employee) => void
 ): ColumnDefinition<Employee>[] => {
     /**
      * @constant baseColumns

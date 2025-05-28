@@ -1,5 +1,6 @@
 
-import { CustomTableProps } from "../../Types" 
+import React from "react"
+import type { CustomTableProps } from "../../Types"
 
 /**
  * A reusable custom table component for displaying tabular data.
@@ -15,7 +16,7 @@ import { CustomTableProps } from "../../Types"
  * 
  * @returns {JSX.Element} The rendered table component.
  */
-export function CustomTable<T>({ data, columns, emptyMessage = "No data Found" }: CustomTableProps<T>) {
+function CustomTable<T>({ data, columns, emptyMessage = "No data Found" }: CustomTableProps<T>) {
     return (
         <div className="custom-table-container">
             {
@@ -31,10 +32,10 @@ export function CustomTable<T>({ data, columns, emptyMessage = "No data Found" }
                             </tr>
                         </thead>
                         <tbody>
-                            {data.map((row, rowIndex) => { 
+                            {data.map((row, rowIndex) => {
                                 return (
                                     <tr key={rowIndex}>
-                                        {columns.map((col: any, colIndex: number) => { 
+                                        {columns.map((col: any, colIndex: number) => {
                                             return (
                                                 <td key={colIndex}>
                                                     {col.render ? col.render(row) : (row as any)[col.accessor]}
@@ -51,3 +52,4 @@ export function CustomTable<T>({ data, columns, emptyMessage = "No data Found" }
         </div>
     )
 }
+export default React.memo(CustomTable) as typeof CustomTable

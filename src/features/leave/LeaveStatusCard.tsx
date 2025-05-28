@@ -1,12 +1,12 @@
-import { ChangeEvent, useEffect, useState } from "react";
-import { Leave, ToastMessage } from "../../Types";
+import { type ChangeEvent, useCallback, useEffect, useMemo, useState } from "react";
+import type { Leave, ToastMessage } from "../../Types";
 import { LeaveType, LeaveStatus, ToastType, ToastContent, ActionType } from "../../Types/enumTypes";
 import { getUserFromSession } from "../../utils/roleUtils";
 import { convertFirstLetterToUpperCase } from "../../utils/leaveUtils";
 import FilterContainer from "../../components/common/FilterContainer";
 import Navbar from "../../components/common/Navbar";
-import { CustomTable } from "../../components/common/CustomTable";
-import Modal from "../../components/common/CustomModal";
+import CustomTable from "../../components/layout/CustomTable";
+import Modal from "../../components/layout/CustomModal";
 import { useUpdateLeaveByIdMutation, useGetLeaveByManagerQuery } from "../../services/leaveService";
 import { useGetEmployeesByManagerQuery } from "../../services/employeeService";
 import { getUserMailFromSession } from "../../utils/roleUtils";
@@ -14,6 +14,8 @@ import { ErrorMessages } from "../../utils/errorUtils";
 import { getLeaveStatusColumns } from "./LeaveStatusColumns";
 import { v4 as uuidv4 } from "uuid"
 import CustomToast from "../../components/layout/CustomToast";
+import CardSection from "../../components/layout/CardSection";
+import DashboardBlock from "../../components/layout/DashboardBlock";
 /**
  * @component LeaveStatus
  * @description Renders a table displaying leave requests for employees under a manager.
@@ -57,11 +59,11 @@ const LeaveStatusCard: React.FC = (): React.JSX.Element => {
     const [updatedLeaveItem, setUpdatedLeaveItem] = useState<Leave | null>(null)
     const [actionType, setActionType] = useState<string>("")
 
-    const handleActionsTypes = (event: ChangeEvent<HTMLSelectElement>, leave: Leave): void => {
+    const handleActionsTypes = useCallback((event: ChangeEvent<HTMLSelectElement>, leave: Leave): void => {
         setUpdatedLeaveItem(leave)
         setActionType(event.target.value)
         setActionPopUp(true)
-    };
+    }, [])
     const [updateLeaveById] = useUpdateLeaveByIdMutation();
     const userEmail = getUserMailFromSession();
 
@@ -96,24 +98,53 @@ const LeaveStatusCard: React.FC = (): React.JSX.Element => {
         setActionPopUp((prev) => !prev)
     }
 
+    /**
+         * @function handleLeaveStatusFilter
+         * @description Memoized callback to update the leave status filter
+         * @param {string} leaveStatus - The leave status to filter by
+         * @returns {void}
+         */
+    const handleLeaveStatusFilter = useCallback((leaveStatus: string): void => {
+        setLeaveStatusFilter(leaveStatus);
+    }, []);
+
+    /**
+     * @function handleLeaveTypeFilter
+     * @description Memoized callback to update the leave type filter
+     * @param {string} leaveType - The leave type to filter by (e.g., 'paid', 'unpaid')
+     * @returns {void}
+     */
+    const handleLeaveTypeFilter = useCallback((leaveType: string): void => {
+        setLeaveTypeFilter(leaveType);
+    }, []);
+
+    /**
+     * @constant memoizedLeaveColumns
+     * @description Memoized leave columns 
+     * @type {ColumnDefinition<Leave>[]}
+     */
+    const memoizedLeaveColumns = useMemo(() => (
+        getLeaveStatusColumns(handleActionsTypes)
+    ), [handleActionsTypes]);
+
     return (
         <>
             <Navbar />
-            <div className='employee-container'>
-                <h1>{convertFirstLetterToUpperCase(authRole ?? "")} Dashboard</h1>
-                <div className="list-container">
-                    <h2>Employees Leave Request</h2>
+            <DashboardBlock
+                title={`${convertFirstLetterToUpperCase(authRole ?? "")} Dashboard`}
+            >
+                <CardSection
+                    title="Employees Leave Request">
                     <FilterContainer
-                        onLeaveStatusFilterChange={(leaveStatus: string) => setLeaveStatusFilter(leaveStatus)}
-                        onLeaveTypeFilterChange={(leaveType: string) => setLeaveTypeFilter(leaveType)}
+                        onLeaveStatusFilterChange={handleLeaveStatusFilter}
+                        onLeaveTypeFilterChange={handleLeaveTypeFilter}
                     />
                     <CustomTable
                         data={filterEmployeeLeaves}
-                        columns={getLeaveStatusColumns(handleActionsTypes)}
+                        columns={memoizedLeaveColumns}
                     />
-                </div>
-            </div>
-
+                </CardSection>
+            </DashboardBlock>
             {actionPopUp && (
                 <Modal
                     title={`Do you want to ${actionType} the request?`}
@@ -124,7 +155,7 @@ const LeaveStatusCard: React.FC = (): React.JSX.Element => {
                         setToastFields({
                             ...toastFields,
                             toastKey: uuidv4(),
-                            type: actionType === ActionType.APPROVE ? ToastType.ERROR : ToastType.ERROR,
+                            type: actionType === ActionType.APPROVE ? ToastType.SUCCESS : ToastType.ERROR,
                             message: actionType === ActionType.APPROVE ? ToastContent.LEAVEAPPROVED :
                                 ToastContent.LEAVEREJECTED
                         })

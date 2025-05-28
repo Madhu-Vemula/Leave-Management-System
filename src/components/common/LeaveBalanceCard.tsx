@@ -1,7 +1,8 @@
-import DonutChart from "../../components/layout/DoNutChart";
-import { LeaveBalanceCardProps } from "../../Types";
+import DonutChart from "./DoNutChart";
+import type { LeaveBalanceCardProps } from "../../Types";
 import { LeaveBalance } from "../../Types/enumTypes";
 import { calculateLeaveTypes } from "../../utils/leaveUtils";
+import CardSection from "../layout/CardSection";
 
 /**
  * @component LeaveBalanceCard
@@ -19,15 +20,15 @@ const LeaveBalanceCard: React.FC<LeaveBalanceCardProps> = (props: LeaveBalanceCa
     const leaveTypes = calculateLeaveTypes(leaveData);
 
     const { paidLeaves, unPaidLeaves } = leaveTypes;
-    console.log(leaveTypes)
     const donutChartData = [
         { name: "Paid", value: paidLeaves, color: "#eb6666" },
         { name: "Unpaid", value: unPaidLeaves, color: "#ffd06e" },
     ]
 
     return (
-        <div className="leave-balance-card">
-            <h2>Total leave balance: {LeaveBalance.BALANCE - leaveTypes.paidLeaves}</h2>
+        <CardSection
+            title={`My leave Balance: ${LeaveBalance.BALANCE - paidLeaves}`}
+        >
             <div className="donut-container">
                 <div className="donut">
                     <DonutChart data={donutChartData} />
@@ -41,7 +42,7 @@ const LeaveBalanceCard: React.FC<LeaveBalanceCardProps> = (props: LeaveBalanceCa
                     </button>
                 </div>
             </div>
-        </div>
+        </CardSection>
     )
 };
 

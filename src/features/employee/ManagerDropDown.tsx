@@ -1,5 +1,5 @@
-import { ChangeEvent, useState } from "react"
-import { ManagerDropDownProps } from "../../Types"
+import { type ChangeEvent, useState } from "react"
+import type { ManagerDropDownProps } from "../../Types"
 
 
 /**

@@ -1,6 +1,6 @@
 import { PieChart, Pie, Cell } from "recharts";
 import { useState } from "react";
-import { DonutChartProps } from "../../Types";
+import type { DonutChartProps } from "../../Types";
 /** 
  * Renders a donut chart to visualize the number of paid and unpaid leaves.
  *

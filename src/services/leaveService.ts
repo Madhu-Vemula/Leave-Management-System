@@ -1,4 +1,4 @@
-import { Leave } from "../Types";
+import type { Leave } from "../Types";
 import { employeeApi } from "./employeeService";
 
 /**
@@ -50,6 +50,7 @@ export const leaveApi = employeeApi.injectEndpoints({
         getLeaveByManager: builder.query<Leave[], string[]>({
             query: () => ({ url: "/leaves" }),
             transformResponse: (response: Leave[], meta, employeeEmails) => {
+                console.log(meta)
                 return response.filter((leave) => employeeEmails.includes(leave.email));
             },
             providesTags: ["Leave"]
@@ -85,7 +86,7 @@ export const leaveApi = employeeApi.injectEndpoints({
             invalidatesTags: ["Leave"]
         })
     })
-});
+})
 
 export const {
     useSubmitLeaveMutation,
