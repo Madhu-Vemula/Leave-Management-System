@@ -1,18 +1,18 @@
-import { useGetEmployeesQuery, useRemoveEmployeeMutation } from "../../services/employeeService";
-import type { Employee, ToastMessage } from "../../Types";
-import { useDeleteLeavesByIdMutation, useLazyGetLeaveByUserQuery } from "../../services/leaveService";
-import EmployeeForm from "../employee/EmployeeForm";
+import { useGetEmployeesQuery, useRemoveEmployeeMutation } from "../services/employeeService"
+import type { Employee, ToastMessage } from "../Types";
+import { useDeleteLeavesByIdMutation, useLazyGetLeaveByUserQuery } from "../services/leaveService";
+import EmployeeForm from "../features/employee/EmployeeForm";
 import { useCallback, useMemo, useState } from "react";
-import Navbar from "../../components/common/Navbar";
-import CustomTable from "../../components/layout/CustomTable";
-import { ErrorMessages } from "../../utils/errorUtils";
-import { getEmployeeColumns } from "../employee/EmployeeColumns";
+import Navbar from "../components/common/Navbar";
+import CustomTable from "../components/layout/CustomTable";
+import { ErrorMessages } from "../utils/errorUtils";
+import { getEmployeeColumns } from "../features/employee/EmployeeColumns";
 import { v4 as uuidv4 } from "uuid"
-import { ToastContent, ToastType } from "../../Types/enumTypes";
-import CustomToast from "../../components/layout/CustomToast";
-import Modal from "../../components/layout/CustomModal";
-import CardSection from "../../components/layout/CardSection";
-import DashboardBlock from "../../components/layout/DashboardBlock";
+import { ToastContent, ToastType } from "../Types/enumTypes";
+import CustomToast from "../components/layout/CustomToast";
+import Modal from "../components/layout/CustomModal";
+import CardSection from "../components/layout/CardSection";
+import DashboardBlock from "../components/layout/DashboardBlock";
 /**
  * @component EmployeeList
  * @description Renders a table of all employees, with options to edit or remove employees.
@@ -46,14 +46,14 @@ const HrDashboard: React.FC = (): React.JSX.Element => {
     }, [])
 
 
-        /**
-     * @function handleRemoveEmployee
-     * @description Handles the initiation of employee removal by:
-     *              - Showing the confirmation modal
-     *              - Setting the employee to be removed in state
-     * @param {Employee} employee - The employee object marked for removal
-     * @returns {void}
-     */
+    /**
+ * @function handleRemoveEmployee
+ * @description Handles the initiation of employee removal by:
+ *              - Showing the confirmation modal
+ *              - Setting the employee to be removed in state
+ * @param {Employee} employee - The employee object marked for removal
+ * @returns {void}
+ */
     const handleRemoveEmployee = useCallback((employee: Employee): void => {
         setShowRemoveEmployeeModal(true);
         setSelectedEmployee(employee);

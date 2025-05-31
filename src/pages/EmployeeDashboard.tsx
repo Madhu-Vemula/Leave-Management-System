@@ -1,12 +1,12 @@
-import Navbar from "../../components/common/Navbar";
-import { useGetLeaveByUserQuery } from "../../services/leaveService";
-import LeaveBalanceCard from "../../components/common/LeaveBalanceCard";
-import Profile from "../../components/common/Profile";
-import { useGetEmployeeByMailQuery } from "../../services/employeeService";
-import { getUserMailFromSession, getUserRoleFromSession } from "../../utils/roleUtils";
-import Loader from "../../components/common/Loader";
-import { convertFirstLetterToUpperCase } from "../../utils/leaveUtils"
-import DashboardBlock from "../../components/layout/DashboardBlock";
+import Navbar from "../components/common/Navbar";
+import { useGetLeaveByUserQuery } from "../services/leaveService";
+import LeaveBalanceCard from "../components/common/LeaveBalanceCard";
+import Profile from "../components/common/Profile";
+import { useGetEmployeeByMailQuery } from "../services/employeeService";
+import { getUserMailFromSession, getUserRoleFromSession } from "../utils/roleUtils";
+import Loader from "../components/common/Loader";
+import { convertFirstLetterToUpperCase } from "../utils/leaveUtils"
+import DashboardBlock from "../components/layout/DashboardBlock";
 
 /**
  * @component EmployeeDashboard

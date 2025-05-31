@@ -1,7 +1,7 @@
 import { RoleType } from "../Types/enumTypes";
-import EmployeeDashboard from "../features/dashboard/EmployeeDashboard";
+import EmployeeDashboard from "../pages/EmployeeDashboard";
 import LeaveHistory from "../features/leave/LeaveHistory";
-import HRDashboard from "../features/dashboard/HRDashboard";
+import HRDashboard from "../pages/HRDashboard";
 import LeaveStatusCard from "../features/leave/LeaveStatusCard";
 import { Navigate } from "react-router-dom";
 
